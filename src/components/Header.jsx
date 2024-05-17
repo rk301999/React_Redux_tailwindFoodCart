@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { GiHamburger } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux"
-import cardData from "../cardData";
 
 
 const Header = () => {

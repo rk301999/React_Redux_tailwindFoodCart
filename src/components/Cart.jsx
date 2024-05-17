@@ -10,6 +10,7 @@ import {
   deleteIndividualItem
 } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast"
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -19,6 +20,7 @@ const Cart = () => {
 
   const emptyCart = (payload) => {
     dispatch(deleteAllItems(payload));
+    toast.success("Your cart is empty ")
   };
   const deleteOneItem = (payload) => {
     dispatch(deleteSingleItem(payload));
@@ -30,6 +32,7 @@ const Cart = () => {
   
   const removeFromTable=(payload)=>{
     dispatch(deleteIndividualItem(payload))
+    toast.success("Item removed from your cart")
   }
 
   const totalprice=()=>{

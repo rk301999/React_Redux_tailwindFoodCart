@@ -3,6 +3,7 @@ import cardData from "../cardData";
 import { FaRegStar } from "react-icons/fa";
 import { addToCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 const Home = () => {
   console.log(cardData);
@@ -12,6 +13,7 @@ const Home = () => {
   const addItemsToCart=(data)=>{
     console.log(data);
     dispatch(addToCart(data));
+    toast.success("Item added to Cart");
   }
 
   return (
