@@ -5,38 +5,50 @@ import { addToCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { connectionStatus } from "../features/connectionSlice";
+import OfflineModal from "./OfflineModal";
+import { MdSignalWifiBad } from "react-icons/md";
 
 
 const Home = () => {
-  console.log(cardData);
-  const[card, setCard] = useState(cardData);
-  const dispatch=useDispatch();
-  const[onlineStatus,setOnlineStatus] = useState(true);
 
+  const[card, setCard] = useState(cardData);
+  const[onlineStatus,setOnlineStatus] = useState(true);
+  const[isOpen,setIsOpen] = useState(false);
+  
   useEffect(()=>{
     window.addEventListener('online', function(e) {
-        console.log('And we\'re back :).');
-        setOnlineStatus(true);
+      console.log('And we\'re back :).');
+      setOnlineStatus(true);
+      setIsOpen(false);
     }, false);
-                
+    
     window.addEventListener('offline', function(e) {
-        console.log('Connection is down.');
-        setOnlineStatus(false);
+      console.log('Connection is down.');
+      setOnlineStatus(false);
+      setIsOpen(true);
     }, false);
-},[])
-
+  },[])
+  
+  const dispatch=useDispatch();
+  dispatch(connectionStatus(onlineStatus));
+  
   const addItemsToCart=(data)=>{
     console.log(data);
     dispatch(addToCart(data));
     toast.success("Item added to Cart");
   }
 
-  dispatch(connectionStatus(onlineStatus));
   
 //  console.log(status);
   if(!onlineStatus){
 
     return (
+      <>
+
+      <OfflineModal open={isOpen}  onClose={()=>setIsOpen(!isOpen)}>
+        <span className="text-[50px] text-[#281b0d]"><MdSignalWifiBad/></span>
+        <p className="text-center italic font-semibold text-lg p-3 text-[#281b0d]">Make sure you are connected to the Internet </p>
+      </OfflineModal>
       <div className='modal w-full h-[90vh] flex items-center justify-center bg-[#AF8F6F]'>
         <div className='w-[500px] h-[300px]  flex items-center justify-center gap-10'>
           
@@ -45,6 +57,7 @@ const Home = () => {
         
         </div>
       </div>
+      </>
     )
   }
 
