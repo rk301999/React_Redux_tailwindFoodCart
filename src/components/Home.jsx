@@ -53,7 +53,7 @@ const Home = () => {
         <div className='w-[500px] h-[300px]  flex items-center justify-center gap-10'>
           
             <img className="rounded-full" src="./public/dog.avif" alt="" />
-            <h1 className="text-[rgb(116,81,45)] text-[60px] font-bold">You are Offline ☹️</h1>
+            <h1 className="text-[rgb(116,81,45)] text-[60px] font-bold">You are Offline </h1>
         
         </div>
       </div>
