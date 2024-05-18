@@ -52,7 +52,7 @@ const Home = () => {
       <div className='modal w-full h-[90vh] flex items-center justify-center bg-[#AF8F6F]'>
         <div className='w-[500px] h-[300px]  flex items-center justify-center gap-10'>
           
-            <img className="rounded-full" src="./public/dog2.svg" alt="i" />
+            <img className="rounded-full" src="/dog.avif" alt="i" />
             <h1 className="text-[rgb(116,81,45)] text-[60px] font-bold">You are Offline </h1>
         
         </div>
