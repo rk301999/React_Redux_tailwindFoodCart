@@ -2,20 +2,31 @@ import React, { useState } from "react";
 import { GiHamburger } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux"
+// import { connectionStatus } from "../features/cartSlice";
 
 
 const Header = () => {
 
   const {cart} = useSelector((state)=>state.cart);
+  const {connect} = useSelector((state)=>state.connect);
+  console.log('header status',connect);
 
   return (
     <>
       <nav className="">
         <div className="main flex flex-row justify-between bg-[#74512D] sticky ">
           <div className="items mr-8 ml-8 flex flex-row justify-between  w-full items-center py-2">
+            <div className="flex items-center gap-9">
             <Link to="/"><h1 className="text-[40px] font-bold text-[#281b0d]">
               <div className="items-center flex italic">Rcafe&nbsp;<GiHamburger /></div>
             </h1></Link>
+            {connect ? <div className="bg-green-700  p-1 rounded-xl h-8">
+              <p className="text-green-950 font-semibold">Online 🟢</p>
+            </div>:<div className="bg-red-700  p-1 rounded-xl h-8">
+              <p className="text-red-950 font-semibold">Offline 🔴</p>
+            </div>}
+            </div>
+            
             <Link to="/cart">
               <button
                 className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"

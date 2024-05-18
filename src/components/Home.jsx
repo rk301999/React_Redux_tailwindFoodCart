@@ -1,19 +1,51 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import cardData from "../cardData";
 import { FaRegStar } from "react-icons/fa";
 import { addToCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { connectionStatus } from "../features/connectionSlice";
+
 
 const Home = () => {
   console.log(cardData);
   const[card, setCard] = useState(cardData);
   const dispatch=useDispatch();
+  const[onlineStatus,setOnlineStatus] = useState(true);
+
+  useEffect(()=>{
+    window.addEventListener('online', function(e) {
+        console.log('And we\'re back :).');
+        setOnlineStatus(true);
+    }, false);
+                
+    window.addEventListener('offline', function(e) {
+        console.log('Connection is down.');
+        setOnlineStatus(false);
+    }, false);
+},[])
 
   const addItemsToCart=(data)=>{
     console.log(data);
     dispatch(addToCart(data));
     toast.success("Item added to Cart");
+  }
+
+  dispatch(connectionStatus(onlineStatus));
+  
+//  console.log(status);
+  if(!onlineStatus){
+
+    return (
+      <div className='modal w-full h-[90vh] flex items-center justify-center bg-[#AF8F6F]'>
+        <div className='w-[500px] h-[300px]  flex items-center justify-center gap-10'>
+          
+            <img className="rounded-full" src="https://img.freepik.com/premium-photo/adorable-dog-character_398492-14968.jpg?size=626&ext=jpg" alt="" />
+            <h1 className="text-[rgb(116,81,45)] text-[60px] font-bold">You are Offline ☹️</h1>
+        
+        </div>
+      </div>
+    )
   }
 
   return (

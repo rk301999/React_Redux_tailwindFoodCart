@@ -83,7 +83,7 @@ const Cart = () => {
                 {cart.length === 0 ? (
                   <>
                     <div className=" p-10 bg-[#F8F4E1] flex items-center justify-center gap-2 rounded-b-md">
-                      <div className="flex flex-col items-center text-[#74512D]">
+                      <div className="flex flex-col items-center text-[rgb(116,81,45)]">
                         <span className="text-3xl">
                           <FaShoppingCart />
                         </span>

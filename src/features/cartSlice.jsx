@@ -35,7 +35,7 @@ const cartSlice = createSlice({
         deleteIndividualItem :(state,action)=>{
             const filteredData = state.cart.filter(data=>data.id != action.payload)
             state.cart = filteredData
-        }
+        },
     }
 })
 
